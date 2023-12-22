@@ -4,8 +4,7 @@ class StartScreen extends StatelessWidget {
   //const StartScreen(void Function() startQuiz,{super.key});   //We wanted a function that takes no argument and also doesn't return a value like switchScreen.
   const StartScreen(this.startQuiz, {super.key});
 
-  final void Function()
-      startQuiz; //Because In previous method we were not be able to pass the startQuiz value to onPressed button
+  final void Function() startQuiz; //Because In previous method we were not be able to pass the startQuiz value to onPressed button
 
   @override
   Widget build(context) {
