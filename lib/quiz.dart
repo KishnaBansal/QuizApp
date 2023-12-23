@@ -34,6 +34,13 @@ class _QuizState extends State<Quiz> {
 
   @override
   Widget build(context) {
+    Widget screenWidget = StartScreen(switchScreen);
+    // ignore: unrelated_type_equality_checks
+    // there are NO curly braces around the if statement body IN LISTS. 
+    //The if statement body also only comprises the next line of code (i.e., you can't have multiple lines of code inside the if statement).
+    if (activeScreen == 'questions-screen') {
+      screenWidget = const QuestionsScreen();
+    }                           
     return MaterialApp(
       home: Scaffold(
         body: Container(
@@ -43,9 +50,7 @@ class _QuizState extends State<Quiz> {
               Color.fromARGB(255, 107, 15, 168)
             ], begin: Alignment.topLeft, end: Alignment.bottomRight),
           ),
-          child: activeScreen == 'start-screen'
-              ? StartScreen(switchScreen)
-              : const QuestionsScreen(),
+          child: screenWidget,
         ),
       ),
     );
