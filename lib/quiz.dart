@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/data/questions.dart';
 import 'package:quiz_app/questions_screen.dart';
 import 'package:quiz_app/start_screen.dart';
 
@@ -25,6 +26,8 @@ class _QuizState extends State<Quiz> {
   //   super.initState(); //super.initState() should come first,it is considered as best practice before doing any additional work
   // }
 
+  List<String> selectedAnswers = [];
+
   var activeScreen = 'start-screen';
   void switchScreen() {
     setState(() {
@@ -32,15 +35,26 @@ class _QuizState extends State<Quiz> {
     });
   }
 
+  void chooseAnswer(String answer) {
+    selectedAnswers.add(answer);
+
+    if (selectedAnswers.length == questions.length) {
+      setState(() {
+        selectedAnswers = [];
+        activeScreen = 'start-screen';
+      });
+    }
+  }
+
   @override
   Widget build(context) {
     Widget screenWidget = StartScreen(switchScreen);
     // ignore: unrelated_type_equality_checks
-    // there are NO curly braces around the if statement body IN LISTS. 
+    // there are NO curly braces around the if statement body IN LISTS.
     //The if statement body also only comprises the next line of code (i.e., you can't have multiple lines of code inside the if statement).
     if (activeScreen == 'questions-screen') {
-      screenWidget = const QuestionsScreen();
-    }                           
+      screenWidget = QuestionsScreen(onSelectAnswer: chooseAnswer);
+    }
     return MaterialApp(
       home: Scaffold(
         body: Container(
